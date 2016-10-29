@@ -6,9 +6,12 @@ class Board extends React.Component {
     const { board, onClick } = this.props;
     console.log(`The board in Board is ${board}`)
     const displayFields = board.map( (player, index) => {
-      // let spacer = (index % 3 == 0 && index != 0) ? <br /> : ''
+      let spacer = ((index+1) % 3 == 0) ? <br /> : ''
       return (
-        <Field player={player} onClick={onClick.bind(null, index)} key={index}/>
+        <span>
+          <Field player={player} onClick={onClick.bind(null, index)} key={index}/> 
+          {spacer}
+        </span>
       )
     })
     

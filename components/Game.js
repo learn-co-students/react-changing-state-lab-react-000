@@ -18,6 +18,11 @@ class Game extends React.Component {
   }
 
   handleReset (ev) {
+    ev.preventDefault();
+    this.setState({
+      board: [null, null, null, null, null, null, null, null, null],
+      turn: 'X'
+    })
   }
 
   handleClick (i, ev) {
@@ -40,7 +45,9 @@ class Game extends React.Component {
         return prev || false
       }
     }, false)
-    if (winCombo){return this.state.board[winCombo[0]]}
+    if (winCombo){
+      return this.state.board[winCombo[0]]
+    }
   }
 
   isComplete (solutions) {
@@ -56,6 +63,11 @@ class Game extends React.Component {
           onClick={this.handleClick}
         />
         {this.isComplete() ? <Status winner={this.getWinner()}/> : ''}
+        <button 
+          className='game__reset' 
+          onClick={this.handleReset}>
+          Reset Game
+        </button>
       </div>
     );
   }
